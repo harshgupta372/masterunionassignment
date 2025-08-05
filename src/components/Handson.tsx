@@ -1,10 +1,10 @@
 'use client';
 
 import { useState, useEffect, useRef } from 'react';
-import { Play, Users, TrendingUp, Target, ChevronDown } from 'lucide-react';
+import { Play, Users, TrendingUp, Target, ChevronDown, Feather } from 'lucide-react';
 import Image from 'next/image';
 
-// --- DATA for the three hands-on learning cards ---
+// --- Updated DATA for the three hands-on learning cards ---
 const learningData = [
   {
     id: 'consulting',
@@ -84,21 +84,9 @@ export default function HandsOnLearning() {
 
   return (
     <div className="bg-black text-white">
-      {/* --- MODIFIED NAVIGATION BAR --- */}
       <nav className="flex items-center justify-between px-12 py-5 sticky top-0 z-50 bg-black border-b border-gray-800/70">
-        {/* Simple Text Logo */}
-        <div className="text-xl font-bold tracking-wide text-white cursor-pointer">
-          masters' union
-        </div>
-        {/* Navigation Links */}
-        <div className="hidden md:flex items-center space-x-8 text-xs font-bold tracking-widest">
-            {['ABOUT US', 'ACADEMICS', 'CAREERS', 'STUDENT LIFE', 'INNOVATION'].map(item => 
-                <a key={item} className="flex items-center space-x-2 cursor-pointer text-gray-300 hover:text-white transition-colors">
-                    <span>{item}</span>
-                    <ChevronDown className="w-4 h-4" />
-                </a>
-            )}
-        </div>
+        <div className="flex items-center space-x-3 cursor-pointer"><Feather className="w-7 h-7 text-white" /><div><div className="text-sm font-semibold leading-tight tracking-wider">MASTERS'</div><div className="text-sm font-semibold leading-tight tracking-wider">UNION</div></div></div>
+        <div className="hidden md:flex items-center space-x-8 text-xs font-bold tracking-widest">{['ABOUT US', 'ACADEMICS', 'CAREERS', 'STUDENT LIFE', 'INNOVATION'].map(item => <a key={item} className="flex items-center space-x-2 cursor-pointer text-gray-300 hover:text-white transition-colors"><span>{item}</span><ChevronDown className="w-4 h-4" /></a>)}</div>
       </nav>
 
       <div className="max-w-7xl mx-auto px-8">
@@ -165,8 +153,9 @@ export default function HandsOnLearning() {
         </div>
       </div>
       
-     
+      {/* Footer Section */}
       
+     
     </div>
   );
 }
