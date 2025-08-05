@@ -2,7 +2,6 @@
 
 import { useState, useEffect, useRef } from 'react';
 import { Play, Users, TrendingUp, Target, ChevronDown } from 'lucide-react';
-import Image from 'next/image';
 
 // --- DATA for the three hands-on learning cards ---
 const learningData = [
@@ -58,14 +57,14 @@ const learningData = [
 
 export default function HandsOnLearning() {
   const [activeIndex, setActiveIndex] = useState(0);
-  const sectionRefs = useRef<(HTMLDivElement | null)[]>([]);
+  const sectionRefs = useRef([]);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
-            const index = sectionRefs.current.indexOf(entry.target as HTMLDivElement);
+            const index = sectionRefs.current.indexOf(entry.target);
             if (index !== -1) {
               setActiveIndex(index);
             }
@@ -84,7 +83,7 @@ export default function HandsOnLearning() {
 
   return (
     <div className="bg-black text-white">
-      {/* --- MODIFIED NAVIGATION BAR --- */}
+      {/* --- NAVIGATION BAR --- */}
       <nav className="flex items-center justify-between px-12 py-5 sticky top-0 z-50 bg-black border-b border-gray-800/70">
         {/* Simple Text Logo */}
         <div className="text-xl font-bold tracking-wide text-white cursor-pointer">
@@ -125,12 +124,17 @@ export default function HandsOnLearning() {
                     <div className="bg-gray-800 text-gray-300 px-4 py-2 rounded-full text-xs font-medium tracking-wider inline-block mb-6">
                       {card.badge}
                     </div>
-                    <h3 className="text-4xl font-light mb-4 leading-tight">{card.title} <br /><span className={`${card.iconColor} italic font-serif`}>{card.subtitle}</span></h3>
+                    <h3 className="text-4xl font-light mb-4 leading-tight">
+                      {card.title} <br />
+                      <span className={`${card.iconColor} italic font-serif`}>{card.subtitle}</span>
+                    </h3>
                     <p className="text-gray-400 mb-8">{card.description}</p>
                     <div className="space-y-4">
                       {card.stats.map(stat => (
                         <div key={stat.number} className="flex items-center space-x-4">
-                          <div className="w-8 h-8 rounded-full bg-gray-800 flex items-center justify-center text-sm font-bold text-white flex-shrink-0">{stat.number}</div>
+                          <div className="w-8 h-8 rounded-full bg-gray-800 flex items-center justify-center text-sm font-bold text-white flex-shrink-0">
+                            {stat.number}
+                          </div>
                           <p className="text-gray-300">{stat.label}</p>
                         </div>
                       ))}
@@ -146,11 +150,10 @@ export default function HandsOnLearning() {
             <div className="sticky top-24">
               <div className="relative w-full rounded-2xl overflow-hidden bg-gray-900" style={{ aspectRatio: '16/10' }}>
                 {learningData.map((card, index) => (
-                  <Image
+                  <img
                     key={card.id}
                     src={card.mediaSrc}
                     alt={card.title}
-                    fill
                     className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-700 ${activeIndex === index ? 'opacity-100' : 'opacity-0'}`}
                   />
                 ))}
@@ -164,9 +167,6 @@ export default function HandsOnLearning() {
           </div>
         </div>
       </div>
-      
-     
-      
     </div>
   );
 }
