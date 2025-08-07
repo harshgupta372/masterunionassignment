@@ -16,7 +16,7 @@ const cardsData = [
 		mediaSrc:
 			'https://images.unsplash.com/photo-1556740738-b6a63e27c4df?w=800&h=600&fit=crop',
 		stats: [
-			{ label: 'Revenue Generated', value: '₹5 Cr+', type: 'graph' },
+			{ label: 'Revenue Generated', value: '₹5 Cr+', },
 			{ label: 'Participating Teams', value: '130+', type: 'avatars' },
 		],
 	},
@@ -158,7 +158,7 @@ export default function MastersUnionHero() {
         }}
 			  >
 				{/* Card Content */}
-                <div className="relative w-full h-full min-h-[300px] md:min-h-[400px] rounded-2xl overflow-hidden bg-gray-200">
+                <div className="relative w-full h-full min-h-[300px] md:min-h-[550px] rounded-2xl overflow-hidden bg-gray-200">
                     <Image src={card.mediaSrc} alt={card.title} fill className="object-cover" />
                 </div>
                 <div className="flex flex-col justify-center space-y-6 md:space-y-8">

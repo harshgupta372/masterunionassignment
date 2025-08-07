@@ -10,7 +10,13 @@ const nextConfig = {
       },
       {
         protocol: 'https',
-        hostname: 'images.mastersunion.link', // This is the missing entry
+        hostname: 'images.mastersunion.link',
+        port: '',
+        pathname: '/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'cdn.tetr.com', // Added this new entry
         port: '',
         pathname: '/**',
       },
