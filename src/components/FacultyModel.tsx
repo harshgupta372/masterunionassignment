@@ -59,11 +59,6 @@ export default function FacultyModel() {
   const statRefs = useRef<(HTMLDivElement | null)[]>([]);
   const [linePositions, setLinePositions] = useState({ y: 0, height: 0 });
 
-  useEffect(() => {
-    document.body.style.overflow = 'hidden';
-    return () => { document.body.style.overflow = 'auto'; };
-  }, []);
-
   // UseLayoutEffect is better for DOM measurements to avoid flickering
   useLayoutEffect(() => {
     if (statRefs.current[0] && statRefs.current[1]) {
@@ -75,7 +70,6 @@ export default function FacultyModel() {
 
   const handleWheel = (event: WheelEvent) => {
     if (isAnimating.current) return;
-    event.preventDefault();
     const direction = event.deltaY > 0 ? 1 : -1;
     setActiveIndex(prevIndex => {
         const newIndex = prevIndex + direction;
@@ -90,7 +84,7 @@ export default function FacultyModel() {
 
   useEffect(() => {
     const currentRef = containerRef.current;
-    if (currentRef) { currentRef.addEventListener('wheel', handleWheel, { passive: false }); }
+    if (currentRef) { currentRef.addEventListener('wheel', handleWheel, { passive: true }); }
     return () => { if (currentRef) { currentRef.removeEventListener('wheel', handleWheel); }};
   }, []);
 

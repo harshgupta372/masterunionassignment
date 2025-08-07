@@ -83,23 +83,6 @@ export default function HandsOnLearning() {
 
   return (
     <div className="bg-black text-white">
-      {/* --- NAVIGATION BAR --- */}
-      <nav className="flex items-center justify-between px-12 py-5 sticky top-0 z-50 bg-black border-b border-gray-800/70">
-        {/* Simple Text Logo */}
-        <div className="text-xl font-bold tracking-wide text-white cursor-pointer">
-          masters' union
-        </div>
-        {/* Navigation Links */}
-        <div className="hidden md:flex items-center space-x-8 text-xs font-bold tracking-widest">
-            {['ABOUT US', 'ACADEMICS', 'CAREERS', 'STUDENT LIFE', 'INNOVATION'].map(item => 
-                <a key={item} className="flex items-center space-x-2 cursor-pointer text-gray-300 hover:text-white transition-colors">
-                    <span>{item}</span>
-                    <ChevronDown className="w-4 h-4" />
-                </a>
-            )}
-        </div>
-      </nav>
-
       <div className="max-w-7xl mx-auto px-8">
         <div className="pt-24 pb-16">
           <h1 className="text-5xl md:text-7xl font-light mb-4 leading-tight">Hands-On Learning:</h1>

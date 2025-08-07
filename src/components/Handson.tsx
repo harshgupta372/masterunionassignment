@@ -70,6 +70,7 @@ export default function MastersUnionHero() {
   const [activeIndex, setActiveIndex] = useState(0);
   const containerRef = useRef<HTMLDivElement>(null);
   const isAnimating = useRef(false);
+  const preventScrollHandler = useRef<((e: WheelEvent) => void) | null>(null);
 
   const handleWheel = (event: WheelEvent) => {
     if (isAnimating.current) return;
@@ -146,15 +147,13 @@ export default function MastersUnionHero() {
 				}}
         onMouseEnter={() => {
           const preventScroll = (e: WheelEvent) => e.preventDefault();
+          preventScrollHandler.current = preventScroll;
           window.addEventListener('wheel', preventScroll, { passive: false });
-          // Save handler for removal
-          (motion.div as any)._preventScrollHandler = preventScroll;
         }}
         onMouseLeave={() => {
-          const handler = (motion.div as any)._preventScrollHandler;
-          if (handler) {
-            window.removeEventListener('wheel', handler);
-            (motion.div as any)._preventScrollHandler = undefined;
+          if (preventScrollHandler.current) {
+            window.removeEventListener('wheel', preventScrollHandler.current);
+            preventScrollHandler.current = null;
           }
         }}
 			  >
