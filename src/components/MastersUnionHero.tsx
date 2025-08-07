@@ -57,14 +57,14 @@ const learningData = [
 
 export default function HandsOnLearning() {
   const [activeIndex, setActiveIndex] = useState(0);
-  const sectionRefs = useRef([]);
+  const sectionRefs = useRef<(HTMLDivElement | null)[]>([]);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
-            const index = sectionRefs.current.indexOf(entry.target);
+            const index = sectionRefs.current.indexOf(entry.target as HTMLDivElement);
             if (index !== -1) {
               setActiveIndex(index);
             }
@@ -95,7 +95,7 @@ export default function HandsOnLearning() {
             {learningData.map((card, index) => {
               const IconComponent = card.icon;
               return (
-                <div key={card.id} ref={el => sectionRefs.current[index] = el} className="min-h-[90vh] flex">
+                <div key={card.id} ref={el => { sectionRefs.current[index] = el; }} className="min-h-[90vh] flex">
                   <div className="flex flex-col items-center mr-8 pt-2">
                     <div className={`w-12 h-12 rounded-full border-2 ${card.borderColor} flex items-center justify-center flex-shrink-0`}>
                       <IconComponent className={`w-6 h-6 ${card.iconColor}`} />

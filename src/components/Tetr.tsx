@@ -26,12 +26,12 @@ const immersionData = [
       image: 'https://cdn.tetr.com/assets/ih-images/indiaMarket.webp',
       title: 'Business Immersions',
       description: 'See how street vendors of India make more money than Silicon Valley startups.',
-      subtitle: 'Gurgaon\'s Banjara Market',
+      subtitle: 'Gurgaon&apos;s Banjara Market',
     },
     cultural: {
       image: 'https://cdn.tetr.com/assets/ih-images/indiaParade.webp',
       title: 'Cultural Immersions',
-      description: "Witness the spectacular military parade and cultural pageantry on India's Republic Day.",
+      description: "Witness the spectacular military parade and cultural pageantry on India&apos;s Republic Day.",
       subtitle: 'Republic Day Parade (New Delhi, Jan 26)',
     },
   },
@@ -40,7 +40,7 @@ const immersionData = [
     business: {
       image: 'https://cdn.tetr.com/assets/ih-images/singSkyline.webp',
       title: 'Business Immersions',
-      description: "Explore Singapore's financial horizon.",
+      description: "Explore Singapore&apos;s financial horizon.",
       subtitle: 'Monetary Authority of Singapore',
     },
     cultural: {
@@ -55,7 +55,7 @@ const immersionData = [
     business: {
       image: 'https://cdn.tetr.com/assets/ih-images/ghanaCocoa.webp',
       title: 'Business Immersions',
-      description: "Witness Ghana's cutting edge agricultural technology and unique innovations.",
+      description: "Witness Ghana&apos;s cutting edge agricultural technology and unique innovations.",
       subtitle: 'AgriTech Ghana',
     },
     cultural: {
@@ -70,7 +70,7 @@ const immersionData = [
     business: {
       image: 'https://cdn.tetr.com/assets/ih-images/usGoogle.webp',
       title: 'Business Immersions',
-      description: "Get a glimpse into new research and products at Google's HQ.",
+      description: "Get a glimpse into new research and products at Google&apos;s HQ.",
       subtitle: 'Googleplex',
     },
     cultural: {
@@ -86,12 +86,12 @@ const immersionData = [
       image: 'https://cdn.tetr.com/assets/ih-images/arGrobo.webp',
       title: 'Business Immersions',
       description: 'Learn how agribusiness is driving innovation.',
-      subtitle: "Los Grobo Group's headquarters",
+      subtitle: "Los Grobo Group&apos;s headquarters",
     },
     cultural: {
       image: 'https://cdn.tetr.com/assets/ih-images/arFootball.webp',
       title: 'Cultural Immersions',
-      description: "Immerse yourself in the passion of Argentina's football.",
+      description: "Immerse yourself in the passion of Argentina&apos;s football.",
       subtitle: 'La Bombonera Stadium',
     },
   },
@@ -190,7 +190,7 @@ export default function WorldImmersion() {
               {immersionData.map((data, index) => (
                 <button
                   key={data.location}
-                  ref={el => locationRefs.current[index] = el}
+                  ref={el => { locationRefs.current[index] = el; }}
                   onClick={() => setActiveIndex(index)}
                   className="relative flex items-center w-full text-left group py-2"
                 >

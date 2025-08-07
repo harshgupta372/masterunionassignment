@@ -5,14 +5,31 @@ import { X } from 'lucide-react';
 import Image from 'next/image';
 import { motion, AnimatePresence } from 'framer-motion';
 
+// Type definitions
+interface Faculty {
+  name: string;
+  title: string;
+  company: string;
+  imageSrc: string;
+}
+
+interface FacultyCategory {
+  id: string;
+  faculty: Faculty[];
+}
+
+type FacultyData = {
+  [key: number]: FacultyCategory;
+};
+
 // --- Data for each faculty category (remains the same) ---
-const facultyData = {
+const facultyData: FacultyData = {
   0: { // Index 0
     id: 'Industry Practitioners',
     faculty: [
         { name: 'Mr. Rajat Mathur', title: 'Managing Director', company: 'MorganStanley', imageSrc: 'https://images.mastersunion.link/uploads/24062025/v2/rajatMathur.webp' },
         { name: 'Mr. Naveen Munjal', title: 'Managing Director', company: 'HEROELECTRIC', imageSrc: 'https://images.mastersunion.link/uploads/24062025/v3/naveenMunjal.webp' },
-        { name: 'Mr. Arjun Vaidya', title: 'Founder', company: "DR. VAIDYA'S", imageSrc: 'https://images.mastersunion.link/uploads/24062025/v3/arjunVaidya.webp' },
+        { name: 'Mr. Arjun Vaidya', title: 'Founder', company: "DR. VAIDYA&apos;S", imageSrc: 'https://images.mastersunion.link/uploads/24062025/v3/arjunVaidya.webp' },
         { name: 'Mr. Manoj Kohli', title: 'Former Country Head', company: 'SoftBank', imageSrc: 'https://images.mastersunion.link/uploads/24062025/v2/manojKohli.webp' },
         { name: 'Captain Raghu Raman', title: 'Former President', company: 'Reliance', imageSrc: 'https://images.mastersunion.link/uploads/24062025/v2/captainRaghu.webp' },
         { name: 'Mr. Rohit Kapoor', title: 'CEO, Food Marketplace', company: 'Swiggy', imageSrc: 'https://images.mastersunion.link/uploads/24062025/v2/rohitKapoor.webp' },
@@ -48,10 +65,10 @@ const statsData = [
     { percentage: 30, label: 'Visiting Faculty', description: 'Professors from Harvard, Stanford and Wharton' },
 ];
 
-const CompanyLogo = ({ company }) => <span className="text-[10px] font-bold tracking-wider text-gray-400">{company}</span>;
+const CompanyLogo = ({ company }: { company: string }) => <span className="text-[10px] font-bold tracking-wider text-gray-400">{company}</span>;
 
 export default function FacultyModel() {
-  const [activeIndex, setActiveIndex] = useState(0);
+  const [activeIndex, setActiveIndex] = useState<0 | 1 | 2>(0);
   const containerRef = useRef<HTMLDivElement>(null);
   const isAnimating = useRef(false);
 
@@ -76,7 +93,7 @@ export default function FacultyModel() {
         if (newIndex >= 0 && newIndex < statsData.length) {
             isAnimating.current = true;
             setTimeout(() => { isAnimating.current = false; }, 800);
-            return newIndex;
+            return newIndex as 0 | 1 | 2;
         }
         return prevIndex;
     });
@@ -95,7 +112,7 @@ export default function FacultyModel() {
     <div ref={containerRef} className="bg-black text-white py-12 h-screen flex flex-col">
       <div className="max-w-7xl mx-auto px-8 w-full">
         <div className="flex justify-between items-center mb-8">
-          <h2 className="text-3xl font-light tracking-tight">Faculty Model at Masters' Union</h2>
+          <h2 className="text-3xl font-light tracking-tight">Faculty Model at Masters&apos; Union</h2>
           <button className="flex items-center space-x-3 border border-white/30 px-4 py-2 rounded-lg hover:bg-white/5 transition-colors text-sm">
             <span>See all our Masters</span> <X className="w-4 h-4" />
           </button>
@@ -129,7 +146,7 @@ export default function FacultyModel() {
             
             <div className="flex flex-col justify-between h-full py-8">
                 {statsData.map((stat, index) => (
-                    <div key={stat.label} ref={el => statRefs.current[index] = el} className="flex items-center space-x-6">
+                    <div key={stat.label} ref={el => { statRefs.current[index] = el; }} className="flex items-center space-x-6">
                         <div className={`text-6xl font-light transition-colors duration-300 ${activeIndex === index ? 'text-yellow-400' : 'text-gray-600'}`}>
                             {stat.percentage}<span className="text-xl ml-1">%</span>
                         </div>
@@ -152,9 +169,9 @@ export default function FacultyModel() {
                     animate={{ opacity: 1 }}
                     exit={{ opacity: 0 }}
                     transition={{ duration: 0.4 }}
-                    className="grid  grid-cols-2 md:grid-cols-3 gap-22" // Reduced gap
+                    className="grid grid-cols-2 md:grid-cols-3 gap-22" // Reduced gap
                 >
-                    {facultyData[activeIndex].faculty.map((faculty) => (
+                    {facultyData[activeIndex]?.faculty.map((faculty) => (
                         <div key={faculty.name} className="bg-[#1a1a1a] rounded-xl overflow-hidden group">
                             <div className="relative bg-gray-800 aspect-square">
                                 <Image src={faculty.imageSrc} alt={faculty.name} fill className="object-cover object-top transition-transform duration-300 group-hover:scale-105" />
